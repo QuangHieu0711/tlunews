@@ -1,5 +1,5 @@
 <?php
-ob_start(); // Bắt đầu bộ đệm
+ob_start(); 
 class AdminController {
     public function manageNews() {
         // Kiểm tra quyền admin
