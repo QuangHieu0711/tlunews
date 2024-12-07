@@ -25,7 +25,7 @@ class User {
         $stmt = $db->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
         $stmt->execute(['username' => $username, 'password' => $password, 'role' => $role]);
 
-        return $db->lastInsertId(); // Trả về ID của người dùng vừa thêm
+        return $db->lastInsertId(); 
     }
 
     // Cập nhật thông tin người dùng
@@ -48,6 +48,7 @@ class User {
         return $stmt->rowCount(); // Trả về số dòng bị ảnh hưởng (1 nếu thành công)
     }
 
+    // Lấy tất cả người dùng
     public static function getAll() {
         $db = Database::connect();
 
@@ -55,18 +56,12 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả người dùng
     }
     public static function getById($id) {
-
         $db = Database::connect();
 
         // Truy vấn cơ sở dữ liệu để lấy thông tin người dùng
         $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
         $stmt->execute(['id' => $id]);
 
-
-
-
-
-        
         // Trả về thông tin người dùng dưới dạng mảng
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
