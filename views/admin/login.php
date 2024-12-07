@@ -4,6 +4,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
+
 // Include model User.php
 require_once 'C:\laragon\www\CngheWEB\tlunews1\models\User.php';
 
