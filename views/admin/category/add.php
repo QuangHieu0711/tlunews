@@ -1,40 +1,79 @@
+<?php
+session_start();
+
+require_once "../../../models/Category.php";
+
+// Kiểm tra quyền admin
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 1) {
+    header("Location: login.php");
+    exit;
+}
+
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+
+    // Kiểm tra dữ liệu nhập
+    if (empty($name)) {
+        $error = "Vui lòng điền đầy đủ thông tin.";
+    } else {
+        // Lưu danh mục vào cơ sở dữ liệu
+        if (Category::add($name)) {
+            $success = "Thêm danh mục thành công!";
+            header("Refresh: 2; url=index.php");
+        } else {
+            $error = "Có lỗi xảy ra, vui lòng thử lại.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm danh mục</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .green-box {
-            background-color: #d4edda; /* Màu xanh lá cây nhạt */
-            color: #155724; /* Màu chữ xanh lá đậm */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="green-box text-center w-50">
-            <h1 class="mb-4">Thêm danh mục</h1>
-            <form method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Tên danh mục:</label>
-                    <input type="text" class="form-control" name="name" id="name" required>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary"><i class="bi bi-skip-backward-circle-fill"></i> Quay lại</button>
-                    <button type="submit" class="btn btn-success"><i class="bi bi-plus-circle-fill"></i> Thêm</button>
-                </div>
-            </form>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h4 mb-0">Thêm danh mục</h1>
+            </div>
+            <div class="card-body">
+                <!-- Thông báo lỗi/thành công -->
+                <?php if (isset($error) && $error): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?= $error ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+                <?php if (isset($success) && $success): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?= $success ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Form nhập liệu -->
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Tên danh mục</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <a href="index.php" class="btn btn-secondary">Hủy</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
