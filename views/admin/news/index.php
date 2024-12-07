@@ -23,7 +23,6 @@ $categoryMap = [];
 foreach ($categories as $category) {
     $categoryMap[$category['id']] = $category['NAME'];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +42,6 @@ foreach ($categories as $category) {
             <a href="/tlunews1/views/admin/news/add.php" class="btn btn-success">Thêm tin tức mới</a>
         </div>
 
-        <!-- Tìm kiếm tin tức -->
         <form action="index.php" method="get" class="mb-4">
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="Tìm kiếm tin tức..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
