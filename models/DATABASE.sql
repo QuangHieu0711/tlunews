@@ -14,7 +14,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping data for table tlunews.categories: ~8 rows (approximately)
+
 INSERT INTO `categories` (`id`, `name`) VALUES
 	(1, 'Hoạt động sinh viên'),
 	(2, 'Nghiên cứu khoa học'),
@@ -25,7 +25,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 	(7, 'Hỗ trợ sinh viên'),
 	(8, 'Hợp tác quốc tế');
 
--- Dumping data for table tlunews.news: ~10 rows (approximately)
+
 INSERT INTO `news` (`id`, `title`, `content`, `image`, `created_at`, `category_id`) VALUES
 	(1, 'Ngày hội Tân sinh viên Đại học Thủy Lợi 2024', 'Đại học Thủy Lợi vừa tổ chức Ngày hội Chào tân sinh viên 2024 với các hoạt động văn nghệ, thể thao và giao lưu ý nghĩa.', 'images/image1.jpg', '2024-12-01 08:00:00', 1),
 	(2, 'Nghiên cứu giải pháp chống ngập đô thị', 'Nhóm nghiên cứu thuộc Khoa Công trình Đại học Thủy Lợi đã công bố giải pháp chống ngập hiệu quả tại các thành phố lớn.', 'images/image2.jpg', '2024-12-02 10:00:00', 2),
