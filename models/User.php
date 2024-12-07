@@ -1,44 +1,74 @@
 <?php
-//strict type
-declare(strict_types= 1);
-class User{
-    //Thuoc tinh
-    private int $id;
-    private $username;
-    private $password;
-    private $role;
+require_once __DIR__ . "/database.php";
 
-    //Methods
-    public function __construct(int $id, string $username, string $password, string $role){
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->role = $role;
+class User {
 
+    // Xác thực người dùng
+    public static function authenticate($username, $password) {
+        $db = Database::connect();
+
+        $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->execute(['username' => $username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && $user['password'] === $password) {
+            return $user; // Trả về thông tin người dùng nếu đúng
+        }
+
+        return false; // Trả về false nếu không tìm thấy hoặc mật khẩu sai
     }
-    public function getId(): int{ 
-        return $this->id;
+
+    // Thêm người dùng mới
+    public static function add($username, $password, $role = 0) {
+        $db = Database::connect();
+
+        $stmt = $db->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
+        $stmt->execute(['username' => $username, 'password' => $password, 'role' => $role]);
+
+        return $db->lastInsertId(); // Trả về ID của người dùng vừa thêm
     }
-    public function getUsername(): string{
-        return $this->username;
+
+    // Cập nhật thông tin người dùng
+    public static function update($id, $username, $password, $role) {
+        $db = Database::connect();
+
+        $stmt = $db->prepare("UPDATE users SET username = :username, password = :password, role = :role WHERE id = :id");
+        $stmt->execute(['id' => $id, 'username' => $username, 'password' => $password, 'role' => $role]);
+
+        return $stmt->rowCount(); // Trả về số dòng bị ảnh hưởng (1 nếu thành công)
     }
-    public function getPassword(): string{
-        return $this->password;
+
+    // Xóa người dùng
+    public static function delete($id) {
+        $db = Database::connect();
+
+        $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->rowCount(); // Trả về số dòng bị ảnh hưởng (1 nếu thành công)
     }
-    public function getRole(): string{
-        return $this->role;
+
+    public static function getAll() {
+        $db = Database::connect();
+
+        $stmt = $db->query("SELECT * FROM users");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả người dùng
     }
-    public function setID(int $id): void{
-        $this->id = $id;
+    public static function getById($id) {
+
+        $db = Database::connect();
+
+        // Truy vấn cơ sở dữ liệu để lấy thông tin người dùng
+        $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+
+
+
+
+
+        
+        // Trả về thông tin người dùng dưới dạng mảng
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function setUsername(string $username): void{
-        $this->username = $username;
-    }
-    public function setPassword(string $password): void{
-        $this->password = $password;
-    }
-    public function setRole(string $role): void{
-        $this->role = $role;
-    }
-    
 }
+?>
