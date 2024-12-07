@@ -84,7 +84,7 @@ foreach ($categories as $category) {
                     </tbody>
                 </table>
                 <?php else: ?>
-                <p class="text-center text-muted">Không có tin tức nào để hiển thị.</p>
+                <p class="text-center text-muted">Không có tin tức nào để hiển thị!</p>
                 <?php endif; ?>
             </div>
         </div>
