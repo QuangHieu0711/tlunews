@@ -1,63 +1,77 @@
 <?php
-require_once 'Category.php'; // Bao gồm model Category
+require_once __DIR__ . '/../models/Category.php';
 
 class CategoryController {
-
-    // Lấy tất cả danh mục
+    
+    // Hiển thị tất cả danh mục
     public function index() {
-        $categories = Category::getAll();
-        // Gọi view và truyền dữ liệu
-        require_once 'views/admin/category/index.php';
+        $categories = Category::getAll(); // Gọi dữ liệu từ Model
+        // Kiểm tra xem có dữ liệu không, tránh trường hợp không có danh mục
+        if ($categories) {
+            require_once __DIR__ . '/../views/admin/category/index.php';
+        } else {
+            echo "Không có danh mục nào.";
+        }
     }
 
-    // Lấy danh mục theo ID
-    public function show($id) {
-        $category = Category::getById($id);
+    // Hiển thị form tạo mới danh mục
+    public function create() {
+        require_once __DIR__ . '/../views/admin/category/add.php'; // Gửi view tạo danh mục
+    }
+
+    // Xử lý tạo mới danh mục
+    public function store() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name']; // Lấy dữ liệu từ form
+            if (empty($name)) {
+                echo "Tên danh mục không được để trống.";
+                return;
+            }
+            // Kiểm tra kết quả của phương thức create
+            if (Category::create($name)) {
+                header('Location: index.php?action=index'); // Chuyển hướng về trang danh sách
+                exit; // Dừng script sau khi chuyển hướng
+            } else {
+                echo "Có lỗi xảy ra khi thêm danh mục.";
+            }
+        }
+    }
+
+    // Hiển thị form chỉnh sửa danh mục
+    public function edit($id) {
+        $category = Category::getById($id); // Lấy danh mục theo ID
         if ($category) {
-            // Truyền dữ liệu đến view
-            require_once 'views/admin/category/show.php';
+            require_once __DIR__ . '/../views/admin/category/edit.php'; // Gửi dữ liệu đến view chỉnh sửa
         } else {
             echo "Danh mục không tồn tại.";
         }
     }
 
-    // Cập nhật danh mục
-    public function update($id, $name) {
-        if (empty($name)) {
-            $message = "Tên danh mục không được để trống.";
-        } else {
+    // Xử lý cập nhật danh mục
+    public function update($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name']; // Lấy dữ liệu từ form
+            if (empty($name)) {
+                echo "Tên danh mục không được để trống.";
+                return;
+            }
+            // Kiểm tra kết quả của phương thức update
             if (Category::update($id, $name)) {
-                $message = "Danh mục đã được cập nhật.";
+                header('Location: index.php?action=index'); // Chuyển hướng về trang danh sách
+                exit; // Dừng script sau khi chuyển hướng
             } else {
-                $message = "Cập nhật danh mục thất bại.";
+                echo "Có lỗi xảy ra khi cập nhật danh mục.";
             }
         }
-        // Truyền thông báo và dữ liệu đến view
-        $category = Category::getById($id);
-        require_once 'views/admin/category/edit.php';
     }
 
-    // Thêm danh mục mới
-    public function create($name) {
-        if (empty($name)) {
-            $message = "Tên danh mục không được để trống.";
-        } else {
-            if (Category::create($name)) {
-                $message = "Danh mục đã được thêm thành công.";
-            } else {
-                $message = "Thêm danh mục thất bại.";
-            }
-        }
-        // Truyền dữ liệu đến view
-        require_once 'views/admin/category/add.php';
-    }
-
-    // Xóa danh mục
+    // Xử lý xóa danh mục
     public function delete($id) {
         if (Category::delete($id)) {
-            echo "Danh mục đã được xóa.";
+            header('Location: index.php?action=index'); // Chuyển hướng về trang danh sách
+            exit; // Dừng script sau khi chuyển hướng
         } else {
-            echo "Xóa danh mục thất bại.";
+            echo "Có lỗi xảy ra khi xóa danh mục.";
         }
     }
 }
