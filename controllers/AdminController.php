@@ -22,6 +22,8 @@ class AdminController {
         // Truyền dữ liệu sang view
         require_once "views/admin/news/index.php";
     }
+
+
 }
-ob_end_flush(); // Kết thúc bộ đệm
+ob_end_flush(); 
 ?>
