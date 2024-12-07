@@ -3,22 +3,19 @@ session_start();
 require_once 'C:\laragon\www\tlunews1\models\News.php';
 require_once 'C:\laragon\www\tlunews1\models\Category.php';
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 1) {
    header("Location: login.php");
    exit;
 }
-
 $searchTerm = isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '';
 
-// Lấy danh sách tin tức nếu có từ khóa tìm kiếm
 if ($searchTerm) {
-    $newsList = News::search($searchTerm); // Hàm tìm kiếm theo từ khóa
+    $newsList = News::search($searchTerm); 
 } else {
-    $newsList = News::getAll(); // Lấy tất cả tin tức nếu không có từ khóa
+    $newsList = News::getAll(); 
 }
 
-$categories = Category::getAll(); // Lấy tất cả danh mục
+$categories = Category::getAll(); 
 $categoryMap = [];
 foreach ($categories as $category) {
     $categoryMap[$category['id']] = $category['NAME'];
