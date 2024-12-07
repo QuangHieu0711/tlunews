@@ -28,7 +28,6 @@ class User {
         return $db->lastInsertId(); 
     }
 
-    // Cập nhật thông tin người dùng
     public static function update($id, $username, $password, $role) {
         $db = Database::connect();
 
@@ -38,7 +37,6 @@ class User {
         return $stmt->rowCount(); // Trả về số dòng bị ảnh hưởng (1 nếu thành công)
     }
 
-    // Xóa người dùng
     public static function delete($id) {
         $db = Database::connect();
 
