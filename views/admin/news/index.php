@@ -8,7 +8,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 1) {
    header("Location: login.php");
    exit;
 }
-// Kiểm tra xem có tìm kiếm không
+
 $searchTerm = isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '';
 
 // Lấy danh sách tin tức nếu có từ khóa tìm kiếm
