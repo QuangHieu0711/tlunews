@@ -50,7 +50,5 @@ class News {
         $db = Database::connect();
         $stmt = $db->prepare("DELETE FROM news WHERE id = ?");
         return $stmt->execute([$id]); // Trả về true/false
-    }
-    
-    
+    } 
 }
