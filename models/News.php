@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/database.php';
-
 class News {
     // Hàm tìm kiếm tin tức theo từ khóa
     public static function search($searchTerm) {
