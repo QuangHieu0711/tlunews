@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 
 require_once 'C:\laragon\www\CngheWEB\tlunews1\models\User.php';
 
-// Xử lý đăng nhập
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = htmlspecialchars(trim($_POST['username'] ?? ''));
