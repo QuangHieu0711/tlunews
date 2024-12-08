@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+
 -- Dumping data for table tlunews.users: ~5 rows (approximately)
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 	(1, 'Quang Hiếu', '12345678', 1),
@@ -73,6 +75,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 	(3, 'Hiền Lương', '12345678', 1),
 	(4, 'guest', '12345678', 0),
 	(5, 'viewer', '12345678', 0);
+
+
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
