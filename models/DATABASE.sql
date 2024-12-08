@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   CONSTRAINT `news_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table tlunews.news: ~10 rows (approximately)
+
 INSERT INTO `news` (`id`, `title`, `content`, `image`, `created_at`, `category_id`) VALUES
 	(2, 'Nghiên cứu giải pháp chống ngập đô thị', 'Nhóm nghiên cứu thuộc Khoa Công trình Đại học Thủy Lợi đã công bố một giải pháp chống ngập đô thị hiệu quả, đáp ứng nhu cầu cấp bách trong bối cảnh biến đổi khí hậu ngày càng nghiêm trọng. Giải pháp này được thiết kế với mục tiêu giảm thiểu tình trạng ngập úng, bảo vệ hạ tầng đô thị và nâng cao chất lượng sống cho người dân. Nhóm nghiên cứu đã ứng dụng các công nghệ mới như hệ thống thoát nước thông minh, các vật liệu chống thấm và công trình xanh để triển khai giải pháp này tại các thành phố lớn. Đây là một bước tiến quan trọng, không chỉ góp phần bảo vệ môi trường mà còn mang lại giá trị lâu dài cho cộng đồng và xã hội.', 'images/image2.jpg', '2024-12-02 10:00:00', 2),
 	(3, 'Lễ kỷ niệm 65 năm thành lập trường', 'Đại học Thủy Lợi vừa tổ chức lễ kỷ niệm 65 năm thành lập trường với sự tham gia của đông đảo cựu sinh viên, giảng viên và khách mời. Sự kiện đã diễn ra long trọng, tạo không gian để ôn lại những chặng đường phát triển của trường, từ những ngày đầu thành lập cho đến nay. Các thế hệ sinh viên đã có dịp gặp gỡ, chia sẻ những kỷ niệm, thành tựu trong học tập và công tác. Lễ kỷ niệm cũng là dịp để trường khẳng định vị thế và cam kết tiếp tục phát triển trong tương lai, đáp ứng nhu cầu đào tạo nguồn nhân lực chất lượng cao cho xã hội.', 'images/image3.webp', '2024-12-03 09:30:00', 3),
@@ -57,7 +57,7 @@ INSERT INTO `news` (`id`, `title`, `content`, `image`, `created_at`, `category_i
 	(8, 'Chương trình hỗ trợ học bổng toàn phần năm 2024', 'Đại học Thủy Lợi đã công bố chương trình học bổng toàn phần dành cho sinh viên xuất sắc năm 2024. Chương trình này không chỉ khuyến khích sinh viên có thành tích học tập xuất sắc mà còn giúp các bạn trẻ vượt qua khó khăn tài chính để tiếp tục con đường học vấn. Các sinh viên được nhận học bổng sẽ được hỗ trợ toàn bộ chi phí học tập, sinh hoạt và các hoạt động ngoại khóa tại trường. Đây là một cơ hội tuyệt vời để sinh viên có thể tập trung vào việc học mà không phải lo lắng về vấn đề tài chính.', 'images/image8.webp', '2024-12-08 09:00:00', 7),
 	(10, 'Giải bóng đá sinh viên toàn quốc khu vực miền Bắc', 'Đội bóng đá sinh viên Đại học Thủy Lợi đã giành chức vô địch tại giải bóng đá sinh viên toàn quốc khu vực miền Bắc 2024, một sự kiện thể thao quan trọng dành cho sinh viên các trường đại học. Với tinh thần thi đấu quyết tâm và khả năng chiến thuật xuất sắc, đội bóng Đại học Thủy Lợi đã vượt qua nhiều đối thủ mạnh để bước lên ngôi vị cao nhất. Thành tích này không chỉ mang lại vinh quang cho đội bóng mà còn góp phần khẳng định thương hiệu thể thao của trường trong các sự kiện thể thao quốc gia.', 'images/image10.jpg', '2024-12-09 17:30:00', 1);
 
--- Dumping structure for table tlunews.users
+
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -67,15 +67,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-
--- Dumping data for table tlunews.users: ~5 rows (approximately)
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 	(1, 'Quang Hiếu', '12345678', 1),
 	(2, 'Thùy Liên', '12345678', 1),
 	(3, 'Hiền Lương', '12345678', 1),
 	(4, 'guest', '12345678', 0),
 	(5, 'viewer', '12345678', 0);
-
 
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
